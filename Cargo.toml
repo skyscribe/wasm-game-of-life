@@ -3,7 +3,7 @@ name = "wasm-game-of-life"
 version = "0.1.0"
 authors = ["Fei Yan <skyscribe.yf@gmail.com>"]
 description = "Simple wasm project for demo with cargo-generate"
-repository = "https://github.com/skyscribe/wasm-game-of-life"
+repository = "https://github.com/skyscribe/wasm-game-of-life.git"
 
 [lib]
 crate-type = ["cdylib", "rlib"]
@@ -14,6 +14,7 @@ default = ["console_error_panic_hook"]
 [dependencies]
 cfg-if = "0.1.2"
 wasm-bindgen = "0.2"
+itertools = "0.7"
 
 # The `console_error_panic_hook` crate provides better debugging of panics by
 # logging them with `console.error`. This is great for development, but requires

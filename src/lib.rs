@@ -1,5 +1,6 @@
 extern crate cfg_if;
 extern crate wasm_bindgen;
+#[macro_use] extern crate itertools;
 
 mod utils;
 
@@ -15,6 +16,9 @@ cfg_if! {
         static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
     }
 }
+
+pub mod universe;
+
 
 #[wasm_bindgen]
 extern {

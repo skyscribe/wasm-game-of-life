@@ -52,8 +52,8 @@ impl Universe {
     pub fn new() -> Universe {
         let width = 64;
         let height = 64;
-        let cells = (0..width*height).map(|x| {
-            if (x %2 == 0) || (x % 7 == 0) {
+        let cells = (0..width*height).map(|_x| {
+            if js_sys::Math::random() < 0.5 {
                 Cell::Alive
             } else {
                 Cell::Dead

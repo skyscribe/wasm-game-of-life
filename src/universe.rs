@@ -48,6 +48,24 @@ impl Universe {
             }).collect();
         self.cells = next;
     }
+
+    pub fn new() -> Universe {
+        let width = 64;
+        let height = 64;
+        let cells = (0..width*height).map(|x| {
+            if (x %2 == 0) || (x % 7 == 0) {
+                Cell::Alive
+            } else {
+                Cell::Dead
+            }
+        }).collect();
+
+        Universe {width, height, cells}
+    }
+
+    pub fn render(&self) -> String {
+        self.to_string()
+    }
 }
 
 impl fmt::Display for Universe {
@@ -57,6 +75,7 @@ impl fmt::Display for Universe {
                 let symbol = if cell == Cell::Dead { '◻' } else { '◼' };
                 write!(f, "{}", symbol)?;
             }
+            write!(f, "\n")?;
         }       
         Ok(())
     }

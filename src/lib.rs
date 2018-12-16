@@ -19,13 +19,12 @@ cfg_if! {
 
 pub mod universe;
 
-
 #[wasm_bindgen]
 extern {
     fn alert(s: &str);
 }
 
 #[wasm_bindgen]
-pub fn greet(name: &str) {
-    alert(&format!("Hello this is {}!", name));
+pub fn get_universe() -> universe::Universe {
+    universe::Universe::new()
 }

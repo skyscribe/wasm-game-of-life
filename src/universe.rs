@@ -78,6 +78,32 @@ impl Universe {
     pub fn cells(&self) -> *const Cell {
         self.cells.as_ptr()
     }
+
+    //Reset all cells to dead after this set 
+    pub fn set_width(&mut self, width: u32) {
+        self.width = width;
+        self.cells = (0..width * self.height).map(|_x| Cell::Dead).collect();
+    }
+
+    //Reset all cells to dead after this reset
+    pub fn set_height(&mut self, height: u32) {
+        self.height = height;
+        self.cells = (0..self.width * height).map(|_x| Cell::Dead).collect();
+    }
+}
+
+//No binding in those implementation functions
+impl Universe {
+    pub fn get_cells(&self) -> &[Cell] {
+        &self.cells
+    }
+
+    pub fn set_cells(&mut self, cells: &[(u32, u32)]) {
+        for (r, c) in cells {
+            let idx = self.get_index(*r, *c);
+            self.cells[idx] = Cell::Alive;
+        }
+    }
 }
 
 impl fmt::Display for Universe {

@@ -3,6 +3,12 @@ extern crate wasm_bindgen;
 extern crate js_sys;
 #[macro_use] extern crate itertools;
 
+macro_rules! log {
+    ( $( $t:tt)* ) => {
+        web_sys::console::log_1(&format!( $( $t )* ).into());
+    }
+}
+
 mod utils;
 
 use cfg_if::cfg_if;

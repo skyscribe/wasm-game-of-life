@@ -38,18 +38,28 @@ impl Universe {
                 let idx = self.get_index(row, col);
                 let cell = self.cells[idx];
                 let nbr_cnt = self.live_neighbour_count(row, col);
-                match (cell, nbr_cnt) {
+                
+                log!("Cell [{},{}] is initially {:?} and has {} live neighbors",
+                    row, col, cell, nbr_cnt);
+                
+                let newstate = match (cell, nbr_cnt) {
                     (Cell::Alive, x) if x < 2 => Cell::Dead,
                     (Cell::Alive, 2) | (Cell::Alive, 3) => Cell::Alive,
                     (Cell::Alive, x) if x > 3 => Cell::Dead,
                     (Cell::Dead, 3) => Cell::Alive,
                     (otherwise, _) => otherwise,
-                }
+                };
+
+                log!(" it becomes {:?}", newstate);
+
+                newstate
             }).collect();
         self.cells = next;
     }
 
     pub fn new() -> Universe {
+        super::utils::set_panic_hook();
+
         let width = 64;
         let height = 64;
         let cells = (0..width*height).map(|_x| {
